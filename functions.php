@@ -106,6 +106,20 @@ function create_socio($name) {
   $stmt->execute();
   $mysqli -> commit();
 
+  // Registar alteração no log da base de dados
+  $log = array("action" => "create");
+
+  $serialized_log = serialize($log);
+
+  $sql = "INSERT INTO socios_updates (socio_id, log, user) VALUES (?, ?, ?)";
+  $stmt = $mysqli->prepare($sql);
+  $stmt->bind_param("isi", $socio_num, $serialized_log, $user_id);
+  $stmt->execute();
+
+  // Close db connection
+  $stmt->close();
+  $mysqli->close();
+
   return $socio_num;
 }
 
@@ -151,8 +165,8 @@ function update_name($num_socio, $name) {
       $log = array(
         "action" => "update",
         "field" => "name",
-        "old_quota" => $current_name,
-        "new_quota" => $name
+        "old_name" => $current_name,
+        "new_name" => $name
       );
 
       $serialized_log = serialize($log);
