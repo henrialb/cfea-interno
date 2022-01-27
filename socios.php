@@ -146,7 +146,7 @@ if(isset($_POST['action'])) {
                       </div>
                       <div class="col">
                         <label for="ano">Ano</label>
-                        <?php if ($quota_year != '9999') { ?>
+                        <?php if ($quota_year != '9999' && $quota_year != '') { ?>
                           <select name="ano" class="form-control">
                             <option value="<?php echo $quota_year - 1 ?>"><?php echo $quota_year - 1 ?></option>
                             <option value="<?php echo $quota_year ?>" selected><?php echo $quota_year ?></option>
@@ -154,7 +154,7 @@ if(isset($_POST['action'])) {
                             <option value="<?php echo $quota_year + 2 ?>"><?php echo $quota_year + 2 ?></option>
                           </select>
                         <?php } else { ?>
-                          <input type="text" name="ano" value="9999">
+                          <input type="text" name="ano" value="<?php echo $quota_year ?>">
                         <?php } ?>
                       </div>
                     </div>
