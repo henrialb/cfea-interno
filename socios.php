@@ -163,7 +163,7 @@ if(isset($_POST['action'])) {
                     <button type="submit" id="btn-enter" class="btn btn-primary w-100">Actualizar</button>
                   </div>
                 </form>
-              <?php } ?>
+              <?php } else { echo display_month($quota_month).' '.$quota_year; } ?>
             </div>
           </div>
         </div><?php
